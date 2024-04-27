@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}Blogs | CoderX {% endblock %}
+{% block body %}
+<div class="container mt-2">
+    <div class="col-md-12">
+        <h2 class="my-3 fw-bold text-success text-center">Our Blogs</h2>
+        {% load humanize %}
+        {% for post in posts %}
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-2 shadow-sm h-md-250 position-relative">
+            <div class="col-md-4 p-2 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-1 text-primary">{{post.category}}</strong>
+                <a href="blog/{{post.slug}}" class="text-decoration-none stretched-link">
+                    <h3 class="mb-0 fw-bold text-dark">{{post.title}}</h3>
+                </a>
+                <div class="my-1 text-muted fs-6">{{post.postDate|naturaltime}} <b>{{post.author}}</b></div>
+            </div>
+            <div class="col-md-4 p-2 d-flex flex-column position-static">
+                <div class="card-text mb-auto text-muted">{{post.content|slice:250|safe}}...</div>
+            </div>
+            <div class="col-md-4 p-2 d-flex flex-column position-static">
+                <img src="media/{{post.thumbnail}}">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
